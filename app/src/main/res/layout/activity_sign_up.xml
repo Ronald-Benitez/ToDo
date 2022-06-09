@@ -22,24 +22,13 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textLogIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:text="@string/activeAcc"
-            android:textAlignment="textEnd"
-            android:textStyle="bold"
-            android:textColor="#0088FF" />
-
-        <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
             android:text="@string/underEmail"
+            android:textAlignment="textEnd"
             android:textColor="#0088FF"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -62,6 +51,7 @@
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="50dp"
             android:text="@string/underPassword"
+            android:textAlignment="textEnd"
             android:textColor="#0088FF"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -96,16 +86,17 @@
             android:textStyle="bold"
             app:cornerRadius="20dp" />
 
-        <ImageButton
-            android:id="@+id/googleButton"
+        <Button
+            android:id="@+id/textLogIn"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="#0088FF"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button"
             android:textStyle="bold"
-            app:cornerRadius="20dp"
-            app:srcCompat="@drawable/google" />
+            android:text="Login"
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
 
@@ -169,9 +160,9 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="1.0" />
 
