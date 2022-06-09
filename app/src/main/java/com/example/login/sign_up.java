@@ -33,9 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class sign_up extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     EditText textMail, textPassword;
-    TextView login;
-    Button logButton;
-    ImageButton googleButton;
+    Button logButton, login;
 
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
@@ -60,8 +58,8 @@ public class sign_up extends AppCompatActivity {
         textPassword = findViewById(R.id.textPassword);
 
         //Initialize Buttons
-        logButton = findViewById(R.id.signButton);
-        googleButton = findViewById(R.id.googleButton2);
+        logButton = findViewById(R.id.signButton);<<<<<<< ui
+
 
         //Set OnClickListener for Login Button
         login.setOnClickListener(new View.OnClickListener() {
