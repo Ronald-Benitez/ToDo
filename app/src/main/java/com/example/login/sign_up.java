@@ -58,7 +58,7 @@ public class sign_up extends AppCompatActivity {
         textPassword = findViewById(R.id.textPassword);
 
         //Initialize Buttons
-        logButton = findViewById(R.id.signButton);<<<<<<< ui
+        logButton = findViewById(R.id.signButton);
 
 
         //Set OnClickListener for Login Button
