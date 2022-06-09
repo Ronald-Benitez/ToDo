@@ -5,5 +5,6 @@
     <string name="forgetPass"><u>forget your password?</u></string>
     <string name="activeAcc"><u>LOG IN</u></string>
     <string name="create"><u>SIGN UP</u></string>
-
+    <string name="invalid_email">E-mail invalido</string>
+    <string name="invalid_password">Contraseña invalida</string>
 </resources>
