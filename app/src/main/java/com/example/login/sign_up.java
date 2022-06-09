@@ -38,8 +38,6 @@ public class sign_up extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     AwesomeValidation awesomeValidation;
 
-    //Auth attributes
-    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +46,6 @@ public class sign_up extends AppCompatActivity {
 
         //Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
-
-        //Initialize Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //Initialize Awesome Validation
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -67,7 +58,8 @@ public class sign_up extends AppCompatActivity {
         textPassword = findViewById(R.id.textPassword);
 
         //Initialize Buttons
-        logButton = findViewById(R.id.signButton);
+        logButton = findViewById(R.id.signButton);<<<<<<< ui
+
 
         //Set OnClickListener for Login Button
         login.setOnClickListener(new View.OnClickListener() {
@@ -88,47 +80,16 @@ public class sign_up extends AppCompatActivity {
                             .addOnCompleteListener(sign_up.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(sign_up.this, "User Created", Toast.LENGTH_SHORT).show();
                                         finish();
-                                    }
-                                    else{
-                                        Toast.makeText(sign_up.this, "Error: "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(sign_up.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                }else{
+                } else {
                     Toast.makeText(sign_up.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            }catch (ApiException e){
-                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void firebaseAuthWithGoogle(GoogleSignInAccount acct){
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(),null);
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(sign_up.this, "Successfully signed in with Google", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(sign_up.this, MainActivity.class));
-                }
-                else{
-                    Toast.makeText(sign_up.this, "Sign in with Google failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
