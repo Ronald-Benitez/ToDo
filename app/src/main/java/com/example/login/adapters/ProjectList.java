@@ -19,9 +19,10 @@ import java.util.List;
 
 public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHolder> {
     List<Proyecto> projectList;
-
-    public ProjectList(List<Proyecto> projectList) {
+    String idUser;
+    public ProjectList(List<Proyecto> projectList, String idUser) {
         this.projectList = projectList;
+        this.idUser = idUser;
     }
 
     @NonNull
@@ -53,7 +54,11 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
 
     @Override
     public int getItemCount() {
-        return projectList.size();
+        try {
+            return projectList.size();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public int conteo(int position){
@@ -87,6 +92,7 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ProjectDetail.class);
                     intent.putExtra("id", projectList.get(getAdapterPosition()).getId());
+                    intent.putExtra("idUser",idUser);
                     view.getContext().startActivity(intent);
                 }
             });

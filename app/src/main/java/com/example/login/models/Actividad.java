@@ -4,19 +4,18 @@ public class Actividad {
     private String id;
     private String nombre;
     private String descripcion;
-    private String fechaIncial;
-    private String fechaFinal;
+    private String fecha;
+    private String estado;
 
     public Actividad(){
 
     }
 
-    public Actividad(String id, String nombre, String descripcion, String fechaIncial, String fechaFinal) {
+    public Actividad(String id, String nombre, String descripcion, String fecha) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fechaIncial = fechaIncial;
-        this.fechaFinal = fechaFinal;
+        this.setFecha(fecha);
     }
 
     public String getId() {
@@ -43,19 +42,20 @@ public class Actividad {
         this.descripcion = descripcion;
     }
 
-    public String getFechaIncial() {
-        return fechaIncial;
+
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setFechaIncial(String fechaIncial) {
-        this.fechaIncial = fechaIncial;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public String getFechaFinal() {
-        return fechaFinal;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setFechaFinal(String fechaFinal) {
-        this.fechaFinal = fechaFinal;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

@@ -26,11 +26,14 @@ public class NewProject extends AppCompatActivity {
     List<Actividad> inProgress = new ArrayList<>();
     List<Actividad> finalizadas = new ArrayList<>();
     Proyecto proyecto = new Proyecto();
+    String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_project);
+        Bundle bundle = getIntent().getExtras();
+        idUser = bundle.getString("idUser");
 
         //Seteo de views
         btnAdd = findViewById(R.id.btnAdd);
@@ -47,8 +50,11 @@ public class NewProject extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(verificarDatos()){
-                    ref.child("proyectos").child(proyecto.getId()).setValue(proyecto);
+                    ref.child(idUser).child("proyectos").child(proyecto.getId()).setValue(proyecto);
                     Toast.makeText(NewProject.this,"Proyecto agregado",Toast.LENGTH_LONG).show();
+                    proyecto = new Proyecto();
+                    etProjectName.setText("");
+                    etProjectDescription.setText("");
                 }
             }
         });
@@ -57,7 +63,9 @@ public class NewProject extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NewProject.this, Projects.class));
+                Intent intent = new Intent(NewProject.this, Projects.class);
+                intent.putExtra("idUser",idUser);
+                startActivity(intent);
             }
         });
     }
@@ -66,7 +74,9 @@ public class NewProject extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(NewProject.this, Projects.class));
+        Intent intent = new Intent(NewProject.this, Projects.class);
+        intent.putExtra("idUser",idUser);
+        startActivity(intent);
     }
 
     //Método que verifica que los datos ingresados sean correctos
