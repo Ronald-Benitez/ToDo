@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    TextView passText,textMail;
+    TextView passText,textMail,forgotPassword;
     Button logButton;
 
     AwesomeValidation awesomeValidation;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // TextView setting
         passText = findViewById(R.id.passText);
         textMail = findViewById(R.id.textMail);
+        forgotPassword = findViewById(R.id.textView5);
 
         // Button setting
         logButton = findViewById(R.id.logButton);

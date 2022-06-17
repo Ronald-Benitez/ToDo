@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="40dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/llProject"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvProjectName"
+            android:textSize="25sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvProjectDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:lines="5"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="firstStrongRtl"
+            android:gravity="right"
+            android:text="TextView" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
