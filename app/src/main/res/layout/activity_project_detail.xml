@@ -21,33 +21,37 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="25sp"
-            app:cornerRadius="60dp"
-            android:text="B" />
+            android:background="#00000000"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back"/>
 
         <TextView
             android:id="@+id/tvProjectName"
             android:layout_width="216dp"
+            android:textColor="#0088FF"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="30sp" />
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/addActividad"
-            android:layout_marginHorizontal="4dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="43dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
-            android:textSize="25sp"
-            app:cornerRadius="60dp"
-            android:text="+" />
+            android:drawableTop="@drawable/ic_baseline_add_24"
+            android:drawableTint="@color/white"
+            app:cornerRadius="8dp" />
 
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,10 +61,12 @@
             <TextView
                 android:id="@+id/tvProjectDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="81dp"
                 android:lines="5"
+                android:paddingLeft="20dp"
                 android:text="TextView"
-                android:textSize="20sp" />
+                android:textColor="#0088FF"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -69,6 +75,9 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Pendientes"
+                android:textAllCaps="true"
+                android:textStyle="bold|italic"
+                android:textColor="#0088FF"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -83,6 +92,9 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="En progreso"
+                android:textAllCaps="true"
+                android:textStyle="bold|italic"
+                android:textColor="#0088FF"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -97,6 +109,9 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Finalizadas"
+                android:textAllCaps="true"
+                android:textColor="#0088FF"
+                android:textStyle="bold|italic"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView

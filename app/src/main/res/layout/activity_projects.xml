@@ -7,17 +7,22 @@
     android:orientation="vertical"
     tools:context=".activities.Projects">
 
-    <Button
-        android:id="@+id/addProject"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:text="Nuevo proyecto" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProjects"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="653dp"
         android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/addProject"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
+        android:drawableTint="@color/white"
+        android:text="Project" />
 
 </LinearLayout>
