@@ -1,6 +1,7 @@
 package com.example.login.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login.R;
+import com.example.login.activities.NewProject;
 import com.example.login.activities.ProjectDetail;
 import com.example.login.models.Proyecto;
 
@@ -82,7 +84,7 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
     public class ProjectViewHolder extends RecyclerView.ViewHolder {
         TextView tvProjectName, tvProjectDescription,tvCompleted;
         LinearLayout llProject;
-        Button button2;
+        Button button2,button;
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProjectName = itemView.findViewById(R.id.tvProjectName);
@@ -90,6 +92,7 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
             tvCompleted = itemView.findViewById(R.id.tvCompleted);
             llProject = itemView.findViewById(R.id.llProject);
             button2 = itemView.findViewById(R.id.button2);
+            button = itemView.findViewById(R.id.button);
             llProject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -109,6 +112,18 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                     sendIntent.setType("text/plain");
                     Intent shareIntent = Intent.createChooser(sendIntent, "Compartir proyecto");
                     view.getContext().startActivity(shareIntent);
+                }
+            });
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), NewProject.class);
+                    intent.putExtra("idProyecto", projectList.get(getAdapterPosition()).getId());
+                    intent.putExtra("idUser",idUser);
+                    Log.i("test",projectList.get(getAdapterPosition()).getId());
+                    Log.i("test",idUser);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
