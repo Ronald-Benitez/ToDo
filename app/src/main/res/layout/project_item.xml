@@ -23,13 +23,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="75dp"
-                android:drawableTint="@color/white"
+                android:id="@+id/button3"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:drawableLeft="@drawable/ic_baseline_edit_24" />
+                android:drawableLeft="@drawable/ic_baseline_clear_24"
+                android:drawableTint="@color/white" />
 
             <TextView
                 android:id="@+id/tvProjectName"
@@ -51,31 +51,51 @@
                 android:background="#00000000"
                 android:drawableRight="@drawable/ic_baseline_share_24"
                 android:drawableTint="@color/white" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvProjectDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="17sp"
+            android:layout_height="79dp"
             android:layout_marginHorizontal="10dp"
-            android:lines="5"
+            android:lines="3"
             android:paddingLeft="10dp"
+            android:text="TextView"
             android:textColor="@color/white"
-            android:textStyle="italic"
-            android:text="TextView" />
+            android:textSize="17sp"
+            android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/tvCompleted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textDirection="firstStrongRtl"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
+        <LinearLayout
             android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
-            android:text="TextView" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvCompleted"
+                android:layout_width="234dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingRight="10dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textDirection="firstStrongRtl" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:drawableRight="@drawable/ic_baseline_edit_24"
+                android:drawableTint="@color/white" />
+
+        </LinearLayout>
 
 
     </LinearLayout>
