@@ -117,7 +117,7 @@ public class NewActivitie extends AppCompatActivity {
         actividad.setDescripcion(etActivityDescription.getText().toString());
         actividad.setId(UUID.randomUUID().toString());
         actividad.setFecha(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
-        actividad.setEstado("pendiente");
+        actividad.setEstado("pendientes");
 
         return true;
     }

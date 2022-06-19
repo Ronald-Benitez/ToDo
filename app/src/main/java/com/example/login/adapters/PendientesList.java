@@ -1,5 +1,6 @@
 package com.example.login.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login.R;
+import com.example.login.activities.NewActivitie;
 import com.example.login.models.Actividad;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,18 +46,18 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
         holder.tvFecha.setText(lista.get(position).getFecha());
         Log.i("PendientesList", "onBindViewHolder: " + lista.get(position).getNombre());
 
-        if(lista.get(position).getEstado().equals("finalizada")) {
+        if(lista.get(position).getEstado().equals("finalizadas")) {
             holder.btnAvanzar.setVisibility(View.INVISIBLE);
         }
 
-        if(lista.get(position).getEstado().equals("pendiente")){
+        if(lista.get(position).getEstado().equals("pendientes")){
             holder.btnRegresar.setVisibility(View.INVISIBLE);
         }
 
         holder.btnAvanzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lista.get(pos).getEstado().equals("pendiente")){
+                if(lista.get(pos).getEstado().equals("pendientes")){
                     pendiente(pos);
                 }else if(lista.get(pos).getEstado().equals("inProgress")){
                     inProgress(pos);
@@ -68,7 +70,7 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
             public void onClick(View view) {
                 if(lista.get(pos).getEstado().equals("inProgress")){
                     inProgressBack(pos);
-                }else if(lista.get(pos).getEstado().equals("finalizada")){
+                }else if(lista.get(pos).getEstado().equals("finalizadas")){
                     finalizadaBack(pos);
                 }
             }
@@ -99,7 +101,7 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("inProgress").child(lista.get(position).getId());
         ref.removeValue();
         Actividad actividad = lista.get(position);
-        actividad.setEstado("finalizada");
+        actividad.setEstado("finalizadas");
         actividad.setFecha(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
         ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("finalizadas").child(actividad.getId());
         ref.setValue(actividad);
@@ -119,14 +121,14 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("inProgress").child(lista.get(position).getId());
         ref.removeValue();
         Actividad actividad = lista.get(position);
-        actividad.setEstado("pendiente");
+        actividad.setEstado("pendientes");
         actividad.setFecha(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
         ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("pendientes").child(actividad.getId());
         ref.setValue(actividad);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        Button btnAvanzar,btnRegresar;
+        Button btnAvanzar,btnRegresar,button4;
         TextView tvActivityName,tvActivityDescription,tvFecha;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,6 +137,20 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
             tvActivityDescription = itemView.findViewById(R.id.tvActivityDescription);
             tvFecha = itemView.findViewById(R.id.tvFecha);
             btnRegresar = itemView.findViewById(R.id.btnRegresar);
+            button4 = itemView.findViewById(R.id.button4);
+
+            button4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, NewActivitie.class);
+                    intent.putExtra("id", padre);
+                    intent.putExtra("idUser", idUser);
+                    intent.putExtra("idEdit", lista.get(getAdapterPosition()).getId());
+                    intent.putExtra("estado",lista.get(getAdapterPosition()).getEstado());
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
