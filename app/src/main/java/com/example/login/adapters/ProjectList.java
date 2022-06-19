@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -81,12 +82,14 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
     public class ProjectViewHolder extends RecyclerView.ViewHolder {
         TextView tvProjectName, tvProjectDescription,tvCompleted;
         LinearLayout llProject;
+        Button button2;
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProjectName = itemView.findViewById(R.id.tvProjectName);
             tvProjectDescription = itemView.findViewById(R.id.tvProjectDescription);
             tvCompleted = itemView.findViewById(R.id.tvCompleted);
             llProject = itemView.findViewById(R.id.llProject);
+            button2 = itemView.findViewById(R.id.button2);
             llProject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -94,6 +97,18 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                     intent.putExtra("id", projectList.get(getAdapterPosition()).getId());
                     intent.putExtra("idUser",idUser);
                     view.getContext().startActivity(intent);
+                }
+            });
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String pas = idUser + "-" + projectList.get(getAdapterPosition()).getId();
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, pas);
+                    sendIntent.setType("text/plain");
+                    Intent shareIntent = Intent.createChooser(sendIntent, "Compartir proyecto");
+                    view.getContext().startActivity(shareIntent);
                 }
             });
         }
