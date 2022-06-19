@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="40dp"
+    android:layout_margin="30dp"
     android:layout_height="wrap_content">
 
 
@@ -22,9 +22,18 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="75dp"
+                android:drawableTint="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:drawableLeft="@drawable/ic_baseline_edit_24" />
+
             <TextView
                 android:id="@+id/tvProjectName"
-                android:layout_width="match_parent"
+                android:layout_width="257dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
@@ -36,12 +45,12 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTint="@color/white"
                 android:background="#00000000"
-                android:drawableLeft="@drawable/ic_baseline_share_24"/>
+                android:drawableRight="@drawable/ic_baseline_share_24"
+                android:drawableTint="@color/white" />
         </LinearLayout>
 
         <TextView

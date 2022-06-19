@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:background="#0088FF"
     tools:context=".activities.ProjectDetail">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="85dp"
+        android:background="@drawable/bottom"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <Button
@@ -26,14 +29,15 @@
 
         <TextView
             android:id="@+id/tvProjectName"
-            android:layout_width="216dp"
-            android:textColor="#0088FF"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
+            android:lines="2"
             android:text="TextView"
-            android:textAllCaps="true"
-            android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textAllCaps="true"
+            android:textColor="#0088FF"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/addActividad"
@@ -51,7 +55,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/shapescroll">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,11 +69,12 @@
                 android:id="@+id/tvProjectDescription"
                 android:layout_width="match_parent"
                 android:layout_height="81dp"
+                android:background="@color/white"
                 android:lines="5"
                 android:paddingLeft="20dp"
                 android:text="TextView"
                 android:textColor="#0088FF"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -76,9 +84,9 @@
                 android:gravity="center"
                 android:text="Pendientes"
                 android:textAllCaps="true"
-                android:textStyle="bold|italic"
                 android:textColor="#0088FF"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPendientes"
@@ -93,9 +101,9 @@
                 android:gravity="center"
                 android:text="En progreso"
                 android:textAllCaps="true"
-                android:textStyle="bold|italic"
                 android:textColor="#0088FF"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvInProgress"
@@ -111,8 +119,8 @@
                 android:text="Finalizadas"
                 android:textAllCaps="true"
                 android:textColor="#0088FF"
-                android:textStyle="bold|italic"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFinalizadas"
