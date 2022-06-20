@@ -3,19 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/drawable-v24/principal_shape.xml" value="0.277" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/drawable-v24/shape_cards.xml" value="0.277" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/drawable/bottom.xml" value="0.277" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/drawable/shape.xml" value="0.277" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/drawable/shapescroll.xml" value="0.277" />
         <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_new_activitie.xml" value="0.3582427536231884" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_new_project.xml" value="0.3582427536231884" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_project_detail.xml" value="0.3582427536231884" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_projects.xml" value="0.3582427536231884" />
         <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/activity_sign_up.xml" value="0.3625" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/pendiente_item.xml" value="0.3582427536231884" />
-        <entry key="..\:/Users/bryan/AndroidStudioProjects/ToDo/app/src/main/res/layout/project_item.xml" value="0.3582427536231884" />
         <entry key="..\:/Users/bryan/AndroidStudioProjects/login/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.36" />
         <entry key="..\:/Users/bryan/AndroidStudioProjects/login/app/src/main/res/drawable/button.xml" value="0.36" />
         <entry key="..\:/Users/bryan/AndroidStudioProjects/login/app/src/main/res/drawable/half_button.xml" value="0.36" />
@@ -41,6 +30,7 @@
         <entry key="..\:/Users/ronal/Downloads/ProyectoFinalPDM-main/login/app/src/main/res/layout/activity_sign_up.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/ronal/Downloads/ProyectoFinalPDM-main/login/app/src/main/res/layout/pendiente_item.xml" value="0.21" />
         <entry key="..\:/Users/ronal/Downloads/ProyectoFinalPDM-main/login/app/src/main/res/layout/project_item.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/ronal/Downloads/ProyectoFinalPDM-main/login/app/src/main/res/layout/user_project.xml" value="0.2234375" />
       </map>
     </option>
   </component>

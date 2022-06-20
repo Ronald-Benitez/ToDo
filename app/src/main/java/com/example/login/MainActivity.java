@@ -26,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
     TextView passText,textMail,forgotPassword;
     Button logButton;
-
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
     @Override
@@ -58,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Intent intent = new Intent(MainActivity.this, Projects.class);
-                                        intent.putExtra("idUser",firebaseAuth.getCurrentUser().getUid());
-
-
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(MainActivity.this, "Authentication failed.",

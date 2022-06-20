@@ -105,7 +105,7 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
             button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String pas = idUser + "-" + projectList.get(getAdapterPosition()).getId();
+                    String pas = idUser + "/" + projectList.get(getAdapterPosition()).getId();
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT, pas);
@@ -121,8 +121,6 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                     Intent intent = new Intent(view.getContext(), NewProject.class);
                     intent.putExtra("idProyecto", projectList.get(getAdapterPosition()).getId());
                     intent.putExtra("idUser",idUser);
-                    Log.i("test",projectList.get(getAdapterPosition()).getId());
-                    Log.i("test",idUser);
                     view.getContext().startActivity(intent);
                 }
             });

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.login.R;
@@ -33,6 +34,7 @@ import java.util.UUID;
 public class NewProject extends AppCompatActivity {
     Button btnAdd,btnBack;
     EditText etProjectName,etProjectDescription;
+    Switch sCompartir;
     List<Actividad> pendientes = new ArrayList<>();
     List<Actividad> inProgress = new ArrayList<>();
     List<Actividad> finalizadas = new ArrayList<>();
@@ -52,6 +54,7 @@ public class NewProject extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         etProjectName = findViewById(R.id.etProjectName);
         etProjectDescription = findViewById(R.id.etProjectDescription);
+        sCompartir = findViewById(R.id.sCompartir);
 
         //Base de datos
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -67,6 +70,11 @@ public class NewProject extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     etProjectName.setText(dataSnapshot.child("nombre").getValue().toString());
                     etProjectDescription.setText(dataSnapshot.child("descripcion").getValue().toString());
+                    if(dataSnapshot.child("compartir").getValue().toString().equals("true")) {
+                        sCompartir.setChecked(true);
+                    }else{
+                        sCompartir.setChecked(false);
+                    }
                 }
 
                 @Override
@@ -135,6 +143,7 @@ public class NewProject extends AppCompatActivity {
         proyecto.setInProgress(inProgress);
         proyecto.setFinalizadas(finalizadas);
         proyecto.setId(UUID.randomUUID().toString());
+        proyecto.setCompartir(sCompartir.isChecked());
         return true;
     }
 }
