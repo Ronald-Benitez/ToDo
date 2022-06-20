@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectDetail extends AppCompatActivity {
     TextView tvProjectName,tvProjectDescription;
@@ -86,9 +87,8 @@ public class ProjectDetail extends AppCompatActivity {
                 proyecto.setNombre(snapshot.child("nombre").getValue(String.class));
                 proyecto.setDescripcion(snapshot.child("descripcion").getValue(String.class));
                 proyecto.setCompartir(snapshot.child("compartir").getValue(String.class));
-
-                if(proyecto.getCompartir()=="false") {
-                    if(!firebaseAuth.getCurrentUser().getUid().equals(idUser)) {
+                if(proyecto.getCompartir().equals("false")) {
+                    if(!Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid().equals(idUser)) {
                         Toast.makeText(ProjectDetail.this, "Proyecto inhabilidato para compartir", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(ProjectDetail.this, Projects.class));
                     }
