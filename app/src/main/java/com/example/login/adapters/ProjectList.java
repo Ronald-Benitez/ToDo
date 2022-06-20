@@ -1,6 +1,9 @@
 package com.example.login.adapters;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +89,7 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
     public class ProjectViewHolder extends RecyclerView.ViewHolder {
         TextView tvProjectName, tvProjectDescription,tvCompleted;
         LinearLayout llProject;
-        Button button2,button;
+        Button button2,button,button3;
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProjectName = itemView.findViewById(R.id.tvProjectName);
@@ -95,6 +98,8 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
             llProject = itemView.findViewById(R.id.llProject);
             button2 = itemView.findViewById(R.id.button2);
             button = itemView.findViewById(R.id.button);
+            button3 = itemView.findViewById(R.id.button3);
+
             llProject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -124,6 +129,23 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                     intent.putExtra("idProyecto", projectList.get(getAdapterPosition()).getId());
                     intent.putExtra("idUser",idUser);
                     view.getContext().startActivity(intent);
+                }
+            });
+
+            button3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("Eliminar proyecto");
+                    builder.setMessage("¿Está seguro de eliminar este proyecto?");
+                    builder.setPositiveButton("Eliminar", (dialog, which) -> {
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(projectList.get(getAdapterPosition()).getId());
+                        ref.removeValue();
+                    });
+                    builder.setNegativeButton("Cancelar", (dialog, which) -> {
+                        dialog.dismiss();
+                    });
+                    builder.show();
                 }
             });
         }

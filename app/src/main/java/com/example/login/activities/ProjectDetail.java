@@ -85,7 +85,11 @@ public class ProjectDetail extends AppCompatActivity {
                 proyecto.setId(snapshot.child("id").getValue(String.class));
                 proyecto.setNombre(snapshot.child("nombre").getValue(String.class));
                 proyecto.setDescripcion(snapshot.child("descripcion").getValue(String.class));
-                proyecto.setCompartir(snapshot.child("compartir").getValue(Boolean.class));
+                if(snapshot.child("compartir").getValue(String.class)=="true") {
+                    proyecto.setCompartir(true);
+                } else {
+                    proyecto.setCompartir(false);
+                }
                 if(!proyecto.getCompartir() && !idUser.equals(firebaseAuth.getCurrentUser().getUid())) {
                     Toast.makeText(ProjectDetail.this, "Proyecto inhabilidato para compartir", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ProjectDetail.this, Projects.class));

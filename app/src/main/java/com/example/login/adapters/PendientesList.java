@@ -1,6 +1,8 @@
 package com.example.login.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -128,7 +130,7 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        Button btnAvanzar,btnRegresar,button4;
+        Button btnAvanzar,btnRegresar,button4,button5;
         TextView tvActivityName,tvActivityDescription,tvFecha;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,6 +140,7 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
             tvFecha = itemView.findViewById(R.id.tvFecha);
             btnRegresar = itemView.findViewById(R.id.btnRegresar);
             button4 = itemView.findViewById(R.id.button4);
+            button5 = itemView.findViewById(R.id.button5);
 
             button4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -149,6 +152,36 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
                     intent.putExtra("idEdit", lista.get(getAdapterPosition()).getId());
                     intent.putExtra("estado",lista.get(getAdapterPosition()).getEstado());
                     context.startActivity(intent);
+                }
+            });
+            button5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("Eliminar");
+                    builder.setMessage("¿Desea eliminar esta actividad?");
+                    builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if(lista.get(getAdapterPosition()).getEstado().equals("pendientes")) {
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("pendientes").child(lista.get(getAdapterPosition()).getId());
+                                ref.removeValue();
+                            }else if(lista.get(getAdapterPosition()).getEstado().equals("inProgress")){
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("inProgress").child(lista.get(getAdapterPosition()).getId());
+                                ref.removeValue();
+                            }else {
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("finalizadas").child(lista.get(getAdapterPosition()).getId());
+                                ref.removeValue();
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
                 }
             });
 
