@@ -82,11 +82,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Pendientes"
+                android:text="Actividades Pendientes"
                 android:textAllCaps="true"
-                android:textColor="#0088FF"
+                android:textColor="@color/white"
+                android:background="#0088FF"
                 android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPendientes"
@@ -99,9 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="En progreso"
+                android:text="actividades en progreso"
                 android:textAllCaps="true"
-                android:textColor="#0088FF"
+                android:background="#0088FF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -116,9 +118,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:background="#0088FF"
                 android:text="Finalizadas"
                 android:textAllCaps="true"
-                android:textColor="#0088FF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
