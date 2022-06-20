@@ -85,15 +85,13 @@ public class ProjectDetail extends AppCompatActivity {
                 proyecto.setId(snapshot.child("id").getValue(String.class));
                 proyecto.setNombre(snapshot.child("nombre").getValue(String.class));
                 proyecto.setDescripcion(snapshot.child("descripcion").getValue(String.class));
-                Toast.makeText(ProjectDetail.this, snapshot.child("compartir").getValue(Boolean.class).toString(), Toast.LENGTH_SHORT).show();
-                if(snapshot.child("compartir").getValue(Boolean.class)) {
-                    proyecto.setCompartir("true");
-                }else{
-                    proyecto.setCompartir("false");
-                }
-                if(proyecto.getCompartir()=="false" || proyecto.getCompartir()==null && !firebaseAuth.getCurrentUser().getUid().equals(idUser)) {
-                    Toast.makeText(ProjectDetail.this, "Proyecto inhabilidato para compartir", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ProjectDetail.this, Projects.class));
+                proyecto.setCompartir(snapshot.child("compartir").getValue(String.class));
+
+                if(proyecto.getCompartir()=="false") {
+                    if(!firebaseAuth.getCurrentUser().getUid().equals(idUser)) {
+                        Toast.makeText(ProjectDetail.this, "Proyecto inhabilidato para compartir", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ProjectDetail.this, Projects.class));
+                    }
                 }
                 pendientes = new ArrayList<>();
                 try {
