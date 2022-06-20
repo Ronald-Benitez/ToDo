@@ -68,12 +68,18 @@ public class NewProject extends AppCompatActivity {
             ref2.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    etProjectName.setText(dataSnapshot.child("nombre").getValue().toString());
-                    etProjectDescription.setText(dataSnapshot.child("descripcion").getValue().toString());
-                    if(dataSnapshot.child("compartir").getValue().toString().equals("true")) {
-                        sCompartir.setChecked(true);
-                    }else{
-                        sCompartir.setChecked(false);
+                    try {
+                        etProjectName.setText(dataSnapshot.child("nombre").getValue().toString());
+                        etProjectDescription.setText(dataSnapshot.child("descripcion").getValue().toString());
+                        if (dataSnapshot.child("compartir").getValue().toString().equals("true")) {
+                            sCompartir.setChecked(true);
+                        } else {
+                            sCompartir.setChecked(false);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(NewProject.this, "Error al cargar el proyecto", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(NewProject.this, Projects.class));
+
                     }
                 }
 
@@ -93,6 +99,8 @@ public class NewProject extends AppCompatActivity {
                     if(idProyecto==null) {
                         ref.child(idUser).child("proyectos").child(proyecto.getId()).setValue(proyecto);
                         Toast.makeText(NewProject.this, "Proyecto agregado", Toast.LENGTH_LONG).show();
+                        etProjectName.setText("");
+                        etProjectDescription.setText("");
                     }else {
                         HashMap<String,Object> map = new HashMap<>();
                         map.put("nombre",proyecto.getNombre());
@@ -106,8 +114,7 @@ public class NewProject extends AppCompatActivity {
                         Toast.makeText(NewProject.this, "Proyecto editado", Toast.LENGTH_LONG).show();
                     }
                     proyecto = new Proyecto();
-                    etProjectName.setText("");
-                    etProjectDescription.setText("");
+
                 }
             }
         });
