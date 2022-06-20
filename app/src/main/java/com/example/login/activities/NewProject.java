@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.login.R;
@@ -35,6 +36,7 @@ public class NewProject extends AppCompatActivity {
     Button btnAdd,btnBack;
     EditText etProjectName,etProjectDescription;
     Switch sCompartir;
+    TextView textView12;
     List<Actividad> pendientes = new ArrayList<>();
     List<Actividad> inProgress = new ArrayList<>();
     List<Actividad> finalizadas = new ArrayList<>();
@@ -49,12 +51,14 @@ public class NewProject extends AppCompatActivity {
         idUser = bundle.getString("idUser");
         idProyecto = bundle.getString("idProyecto");
 
+
         //Seteo de views
         btnAdd = findViewById(R.id.btnAdd);
         btnBack = findViewById(R.id.btnBack);
         etProjectName = findViewById(R.id.etProjectName);
         etProjectDescription = findViewById(R.id.etProjectDescription);
         sCompartir = findViewById(R.id.sCompartir);
+        textView12 = findViewById(R.id.textView12);
 
         //Base de datos
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -64,6 +68,7 @@ public class NewProject extends AppCompatActivity {
         DatabaseReference ref2 = database2.getReference();
         if(idProyecto != null){
             btnAdd.setText("Editar");
+            textView12.setText("Editar proyecto");
             ref2 = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(idProyecto);
             ref2.addValueEventListener(new ValueEventListener() {
                 @Override
