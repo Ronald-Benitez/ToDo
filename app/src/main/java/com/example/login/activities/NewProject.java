@@ -148,7 +148,11 @@ public class NewProject extends AppCompatActivity {
         proyecto.setInProgress(inProgress);
         proyecto.setFinalizadas(finalizadas);
         proyecto.setId(UUID.randomUUID().toString());
-        proyecto.setCompartir(sCompartir.isChecked());
+        if(sCompartir.isChecked()) {
+            proyecto.setCompartir("true");
+        }else{
+            proyecto.setCompartir("false");
+        }
         return true;
     }
 }
