@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.login.R;
 import com.example.login.adapters.ProjectList;
 import com.example.login.models.Actividad;
 import com.example.login.models.Proyecto;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,21 +28,24 @@ import java.util.List;
 
 public class Projects extends AppCompatActivity {
     RecyclerView rvProjects;
-    Button add;
+    Button add,findProject;
     DatabaseReference ref ;
     List<Proyecto> proyectos;
     String idUser;
+    FirebaseAuth firebaseAuth;
+    Dialog ventana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
-        Bundle bundle = getIntent().getExtras();
-        idUser = bundle.getString("idUser");
+        firebaseAuth = FirebaseAuth.getInstance();
+        idUser = firebaseAuth.getCurrentUser().getUid();
 
         //Seteo de views
         rvProjects = findViewById(R.id.rvProjects);
         add = findViewById(R.id.addProject);
+        findProject = findViewById(R.id.findProject);
 
         //Recycle view management
         proyectos = new ArrayList<>();
@@ -49,6 +56,8 @@ public class Projects extends AppCompatActivity {
         //Base de datos
         ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos");
         rvProjects.setHasFixedSize(true);
+
+
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,6 +125,42 @@ public class Projects extends AppCompatActivity {
                 Intent intent = new Intent(Projects.this, NewProject.class);
                 intent.putExtra("idUser", idUser);
                 startActivity(intent);
+            }
+        });
+
+        findProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ventana = new Dialog(Projects.this);
+                ventana.setContentView(R.layout.user_project);
+                Button cancelar = ventana.findViewById(R.id.cancelar);
+                Button buscar = ventana.findViewById(R.id.buscar);
+                EditText codigo = ventana.findViewById(R.id.codigo);
+
+                cancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ventana.dismiss();
+                    }
+                });
+
+                buscar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(view.getContext(), ProjectDetail.class);
+                        String[] datos = codigo.getText().toString().split("/");
+                        if(datos.length == 2) {
+
+                            intent.putExtra("id", datos[1]);
+                            intent.putExtra("idUser", datos[0]);
+                            Toast.makeText(Projects.this, "Buscando proyecto...", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(Projects.this, "Codigo invalido", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                ventana.show();
             }
         });
 

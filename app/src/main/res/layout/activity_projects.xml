@@ -14,18 +14,36 @@
         android:layout_weight="1" />
 
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/findProject"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:drawableTint="@color/white"
+            android:text="Proyecto externo" />
         <Button
             android:id="@+id/addProject"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_baseline_add_24"
             android:drawableTint="@color/white"
-            android:elevation="1dp"
             android:text="Project" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

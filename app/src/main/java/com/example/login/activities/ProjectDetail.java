@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.login.R;
 import com.example.login.adapters.PendientesList;
 import com.example.login.models.Actividad;
 import com.example.login.models.Proyecto;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,12 +34,14 @@ public class ProjectDetail extends AppCompatActivity {
     DatabaseReference ref;
     List<Actividad> pendientes,inProgress,finalizadas;
     String idUser;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_detail);
         Bundle bundle = getIntent().getExtras();
         idUser = bundle.getString("idUser");
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Seteo de views
         tvProjectName = findViewById(R.id.tvProjectName);
@@ -61,17 +65,31 @@ public class ProjectDetail extends AppCompatActivity {
         rvInProgress.setHasFixedSize(true);
         rvPendientes.setHasFixedSize(true);
 
-        //Base de datos
-        ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(bundle.getString("id"));
+        try {
+            //Base de datos
+            ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(bundle.getString("id"));
+        }catch (Exception e) {
+            Toast.makeText(this, "Error al cargar el proyecto", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,Projects.class));
+        }
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists()){
+                    Toast.makeText(ProjectDetail.this, "Error al cargar el proyecto", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProjectDetail.this,Projects.class));
+                }
+
                 proyecto = new Proyecto();
                 proyecto.setId(snapshot.child("id").getValue(String.class));
                 proyecto.setNombre(snapshot.child("nombre").getValue(String.class));
                 proyecto.setDescripcion(snapshot.child("descripcion").getValue(String.class));
-
+                proyecto.setCompartir(snapshot.child("compartir").getValue(Boolean.class));
+                if(!proyecto.getCompartir() && !idUser.equals(firebaseAuth.getCurrentUser().getUid())) {
+                    Toast.makeText(ProjectDetail.this, "Proyecto inhabilidato para compartir", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProjectDetail.this, Projects.class));
+                }
                 pendientes = new ArrayList<>();
                 try {
                     for(DataSnapshot ds2: snapshot.child("pendientes").getChildren()) {
@@ -121,8 +139,6 @@ public class ProjectDetail extends AppCompatActivity {
 
                 tvProjectName.setText(proyecto.getNombre());
                 tvProjectDescription.setText(proyecto.getDescripcion());
-
-
 
             }
 

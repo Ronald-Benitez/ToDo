@@ -7,6 +7,7 @@ public class Proyecto {
     private String id;
     private String nombre;
     private String descripcion;
+    private Boolean compartir;
     private List<Actividad> pendientes;
     private List<Actividad> inProgress;
     private List<Actividad> finalizadas;
@@ -14,13 +15,14 @@ public class Proyecto {
     public Proyecto() {
     }
 
-    public Proyecto(String id, String nombre, String descripcion, List<Actividad> pendientes, List<Actividad> inProgress, List<Actividad> finalizadas) {
+    public Proyecto(String id, String nombre, String descripcion, Boolean compartir, List<Actividad> pendientes, List<Actividad> inProgress, List<Actividad> finalizadas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.pendientes = pendientes;
         this.inProgress = inProgress;
         this.finalizadas = finalizadas;
+        this.compartir = compartir;
     }
 
     public String getId() {
@@ -69,5 +71,13 @@ public class Proyecto {
 
     public void setFinalizadas(List<Actividad> finalizadas) {
         this.finalizadas = finalizadas;
+    }
+
+    public Boolean getCompartir() {
+        return compartir;
+    }
+
+    public void setCompartir(Boolean compartir) {
+        this.compartir = compartir;
     }
 }
