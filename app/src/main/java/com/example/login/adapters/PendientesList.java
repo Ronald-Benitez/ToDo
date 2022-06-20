@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,10 +60,14 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
         holder.btnAvanzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lista.get(pos).getEstado().equals("pendientes")){
-                    pendiente(pos);
-                }else if(lista.get(pos).getEstado().equals("inProgress")){
-                    inProgress(pos);
+                try {
+                    if (lista.get(pos).getEstado().equals("pendientes")) {
+                        pendiente(pos);
+                    } else if (lista.get(pos).getEstado().equals("inProgress")) {
+                        inProgress(pos);
+                    }
+                }catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error al cambiar estado", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -70,10 +75,14 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
         holder.btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lista.get(pos).getEstado().equals("inProgress")){
-                    inProgressBack(pos);
-                }else if(lista.get(pos).getEstado().equals("finalizadas")){
-                    finalizadaBack(pos);
+                try {
+                    if (lista.get(pos).getEstado().equals("inProgress")) {
+                        inProgressBack(pos);
+                    } else if (lista.get(pos).getEstado().equals("finalizadas")) {
+                        finalizadaBack(pos);
+                    }
+                }catch (Exception e) {
+                    Toast.makeText(view.getContext(), "Error al cambiar estado", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -163,15 +172,20 @@ public class PendientesList extends RecyclerView.Adapter<PendientesList.ViewHold
                     builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            if(lista.get(getAdapterPosition()).getEstado().equals("pendientes")) {
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("pendientes").child(lista.get(getAdapterPosition()).getId());
-                                ref.removeValue();
-                            }else if(lista.get(getAdapterPosition()).getEstado().equals("inProgress")){
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("inProgress").child(lista.get(getAdapterPosition()).getId());
-                                ref.removeValue();
-                            }else {
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("finalizadas").child(lista.get(getAdapterPosition()).getId());
-                                ref.removeValue();
+                            try {
+                                if (lista.get(getAdapterPosition()).getEstado().equals("pendientes")) {
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("pendientes").child(lista.get(getAdapterPosition()).getId());
+                                    ref.removeValue();
+                                } else if (lista.get(getAdapterPosition()).getEstado().equals("inProgress")) {
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("inProgress").child(lista.get(getAdapterPosition()).getId());
+                                    ref.removeValue();
+                                } else {
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(padre).child("finalizadas").child(lista.get(getAdapterPosition()).getId());
+                                    ref.removeValue();
+                                }
+                                Toast.makeText(view.getContext(), "Actividad eliminada", Toast.LENGTH_SHORT).show();
+                            }catch (Exception e) {
+                                Toast.makeText(view.getContext(), "Error al eliminar", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
