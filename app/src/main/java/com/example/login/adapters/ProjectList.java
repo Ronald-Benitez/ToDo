@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -139,8 +140,13 @@ public class ProjectList extends RecyclerView.Adapter<ProjectList.ProjectViewHol
                     builder.setTitle("Eliminar proyecto");
                     builder.setMessage("¿Está seguro de eliminar este proyecto?");
                     builder.setPositiveButton("Eliminar", (dialog, which) -> {
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(projectList.get(getAdapterPosition()).getId());
-                        ref.removeValue();
+                        try {
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(projectList.get(getAdapterPosition()).getId());
+                            ref.removeValue();
+                            Toast.makeText(view.getContext(), "Proyecto eliminado", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText(view.getContext(), "Error al eliminar el proyecto", Toast.LENGTH_SHORT).show();
+                        }
                     });
                     builder.setNegativeButton("Cancelar", (dialog, which) -> {
                         dialog.dismiss();

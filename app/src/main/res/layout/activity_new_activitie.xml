@@ -30,7 +30,7 @@
             android:textAlignment="center"
             android:textSize="25sp"
             android:textColor="#0088FF"
-            android:text="TextView" />
+            android:text="Nueva actividad" />
 
         <TextView
             android:id="@+id/textView8"

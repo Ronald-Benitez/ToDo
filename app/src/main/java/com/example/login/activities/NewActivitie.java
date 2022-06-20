@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.login.R;
@@ -25,6 +26,7 @@ public class NewActivitie extends AppCompatActivity {
     Button btnAddActivity,btnBack;
     EditText etActivityName,etActivityDescription;
     String idProyecto;
+    TextView textView14;
     Actividad actividad = new Actividad();
     String idUser,idEdit,estado;
 
@@ -44,6 +46,7 @@ public class NewActivitie extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         etActivityName = findViewById(R.id.etActivityName);
         etActivityDescription = findViewById(R.id.etActivityDescription);
+        textView14 = findViewById(R.id.textView14);
 
         //Base de datos
         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -52,20 +55,36 @@ public class NewActivitie extends AppCompatActivity {
         //Editar
         if(idEdit != null) {
             btnAddActivity.setText("Editar");
-            ref2 = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(idProyecto).child(estado).child(idEdit);
-            ref2.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    actividad = dataSnapshot.getValue(Actividad.class);
-                    etActivityName.setText(actividad.getNombre());
-                    etActivityDescription.setText(actividad.getDescripcion());
-                }
+            textView14.setText("Editar Actividad");
+            try {
+                ref2 = FirebaseDatabase.getInstance().getReference().child(idUser).child("proyectos").child(idProyecto).child(estado).child(idEdit);
+                ref2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        actividad = dataSnapshot.getValue(Actividad.class);
+                        try {
+                            etActivityName.setText(actividad.getNombre());
+                            etActivityDescription.setText(actividad.getDescripcion());
+                        }catch (Exception e) {
+                            Toast.makeText(NewActivitie.this, "Error al cargar actividad", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(NewActivitie.this, ProjectDetail.class);
+                            intent.putExtra("id", idProyecto);
+                            intent.putExtra("idUser", idUser);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
+            }catch (Exception e){
+                Toast.makeText(this, "Error al cargar la actividad", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, Projects.class));
+            }
         }
 
         //Base de datos
@@ -81,12 +100,14 @@ public class NewActivitie extends AppCompatActivity {
                     if(idEdit != null) {
                         actividad.setId(idEdit);
                         message = "Actividad editada";
+                    }else{
+                        etActivityName.setText("");
+                        etActivityDescription.setText("");
                     }
                     ref.child(idUser).child("proyectos").child(idProyecto).child("pendientes").child(actividad.getId()).setValue(actividad);
                     Toast.makeText(NewActivitie.this, message, Toast.LENGTH_LONG).show();
                     actividad = new Actividad();
-                    etActivityName.setText("");
-                    etActivityDescription.setText("");
+
                 }
             }
         });
@@ -97,7 +118,9 @@ public class NewActivitie extends AppCompatActivity {
                 Intent intent = new Intent(NewActivitie.this, ProjectDetail.class);
                 intent.putExtra("id", idProyecto);
                 intent.putExtra("idUser", idUser);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -126,9 +149,12 @@ public class NewActivitie extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         Intent intent = new Intent(NewActivitie.this,ProjectDetail.class);
         intent.putExtra("id",idProyecto);
         intent.putExtra("idUser",idUser);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 }
