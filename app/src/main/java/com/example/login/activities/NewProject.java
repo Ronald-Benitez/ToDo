@@ -97,6 +97,11 @@ public class NewProject extends AppCompatActivity {
                         HashMap<String,Object> map = new HashMap<>();
                         map.put("nombre",proyecto.getNombre());
                         map.put("descripcion",proyecto.getDescripcion());
+                        if(sCompartir.isChecked()){
+                            map.put("compartir","true");
+                        }else{
+                            map.put("compartir","false");
+                        }
                         ref.child(idUser).child("proyectos").child(idProyecto).updateChildren(map);
                         Toast.makeText(NewProject.this, "Proyecto editado", Toast.LENGTH_LONG).show();
                     }
