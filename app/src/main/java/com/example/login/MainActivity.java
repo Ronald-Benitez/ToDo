@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button logButton;
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         awesomeValidation.addValidation(this,R.id.textMail, Patterns.EMAIL_ADDRESS,R.string.invalid_email);
         awesomeValidation.addValidation(this,R.id.passText, ".{5,}",R.string.invalid_password);
-
+        if (user != null) {
+            startActivity(new Intent(MainActivity.this, Projects.class));
+            finish();
+        }
         // TextView setting
         passText = findViewById(R.id.passText);
         textMail = findViewById(R.id.textMail);
@@ -84,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Recovery.class);
+                startActivity(intent);
             }
         });
     }

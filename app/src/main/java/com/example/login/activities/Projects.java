@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.login.MainActivity;
 import com.example.login.R;
 import com.example.login.adapters.ProjectList;
 import com.example.login.models.Actividad;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class Projects extends AppCompatActivity {
     RecyclerView rvProjects;
-    Button add,findProject;
+    Button add,findProject,logout;
     DatabaseReference ref ;
     List<Proyecto> proyectos;
     String idUser;
@@ -46,6 +47,7 @@ public class Projects extends AppCompatActivity {
         rvProjects = findViewById(R.id.rvProjects);
         add = findViewById(R.id.addProject);
         findProject = findViewById(R.id.findProject);
+        logout = findViewById(R.id.logOut);
 
         //Recycle view management
         proyectos = new ArrayList<>();
@@ -161,6 +163,15 @@ public class Projects extends AppCompatActivity {
                     }
                 });
                 ventana.show();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Projects.this, MainActivity.class));
             }
         });
 
