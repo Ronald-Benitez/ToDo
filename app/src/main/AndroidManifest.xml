@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
+            android:name=".Recovery"
+            android:exported="false" />
+        <activity
             android:name=".activities.NewActivitie"
             android:exported="false" />
         <activity
